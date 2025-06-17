@@ -14,20 +14,11 @@ export class Cache {
     }
 
     add<T>(key: string, val: T) {
-       console.log(`Add Cache for ${key}.`);
         const entry: CacheEntry<T> = {
             createdAt: Date.now(),
             val: val,
         }
-        this.#cache.set(key, entry);    
-        console.log(`Added Cache for ${key}.`);
-        if(this.#cache.has(key)) {
-            console.log(`Cache has now entry for ${key}.`);
-
-        } else {
-            
-            console.log(`ALARM AAAAAAH for ${key}.`);
-        }
+        this.#cache.set(key, entry);
     }
 
     get<T>(key:string) {

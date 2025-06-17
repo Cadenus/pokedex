@@ -23,7 +23,15 @@ async function replCallback(state: State, input: string): Promise<void> {
   try {
     const command = state.commands[cleanedInput[0]];
     if(command !== undefined) {
-      await command.callback(state);
+      const commandString = cleanedInput.shift();
+      if(cleanedInput === undefined) {
+        console.log(`Calling [${commandString}]`);
+        await command.callback(state);
+      } else {
+        console.log(`Calling [${commandString}]`);
+        cleanedInput.forEach(line => console.log(`Line: ${line}`));
+        await command.callback(state, ...cleanedInput);
+      }
     } else {
       throw new Error("Unknown command");
     }
